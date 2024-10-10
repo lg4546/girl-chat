@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与 AI 女友聊天</title>
+    <link rel="stylesheet" href="chat-styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">返回首页</a>
+        <h1 id="chat-title">与 AI 女友聊天</h1>
+    </header>
+    <main id="chat-container">
+        <div id="chat-area">
+            <div id="chat-messages"></div>
+            <div id="chat-input">
+                <textarea id="message-input" placeholder="输入消息..." rows="3"></textarea>
+                <button id="send-button">发送</button>
+            </div>
+        </div>
+        <div id="beauty-image">
+            <!-- 美女图片将在这里显示 -->
+        </div>
+    </main>
+    <div id="ai-settings">
+        <button id="settings-toggle">设置</button>
+        <div id="settings-panel" class="hidden">
+            <h3>AI 性格设置</h3>
+            <select id="ai-personality">
+                <option value="default">默认</option>
+                <option value="shy">害羞</option>
+                <option value="outgoing">外向</option>
+                <option value="romantic">浪漫</option>
+            </select>
+        </div>
+    </div>
+    <script src="chat-script.js"></script>
+</body>
+</html>
