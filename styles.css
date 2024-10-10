@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,74 +7,120 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #FFF0F5; /* 淡粉色背景 */
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #0f0f1f;
+    color: #e0e0e0;
     line-height: 1.6;
 }
 
 header {
-    background-color: #FFB6C1; /* 浅粉红色 */
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
 }
 
-.subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00ffff;
 }
 
 nav ul {
     list-style-type: none;
     display: flex;
-    justify-content: center;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin-left: 2rem;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+    color: #e0e0e0;
+    font-weight: 400;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #FF69B4; /* 热粉红 */
+    color: #00ffff;
 }
 
 main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    padding-top: 60px;
+}
+
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(45deg, #0f0f1f, #1f1f3f);
+    padding-top: 100px; /* 增加顶部内边距 */
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.subtitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #b0b0b0;
+}
+
+.ai-animation {
+    font-size: 3rem;
+    margin-top: 2rem;
+}
+
+.ai-animation i {
+    margin: 0 1rem;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
 }
 
 #gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+    padding: 5rem 5%;
 }
 
 .gallery-item {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 12px rgba(0, 255, 255, 0.2);
 }
 
 .gallery-item img {
@@ -84,52 +132,54 @@ main {
 .gallery-item h3 {
     padding: 1rem;
     font-size: 1.2rem;
-    color: #FF69B4;
+    color: #00ffff;
 }
 
 .gallery-item p {
     padding: 0 1rem 1rem;
     font-size: 0.9rem;
+    color: #b0b0b0;
 }
 
 #random-match {
     text-align: center;
-    margin: 2rem 0;
+    margin: 2rem 0 5rem;
 }
 
 #random-match-btn {
-    background-color: #FF69B4;
-    color: #fff;
+    background-color: #00ffff;
+    color: #0f0f1f;
     border: none;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #random-match-btn:hover {
-    background-color: #FF1493;
+    background-color: #00cccc;
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
 }
 
 footer {
-    background-color: #FFB6C1;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #b0b0b0;
     text-align: center;
-    padding: 1rem 0;
+    padding: 2rem 0;
     margin-top: 2rem;
 }
 
 .footer-links a, .social-icons a {
-    color: #fff;
+    color: #b0b0b0;
     text-decoration: none;
     margin: 0 10px;
     transition: color 0.3s ease;
 }
 
 .footer-links a:hover, .social-icons a:hover {
-    color: #FF69B4;
+    color: #00ffff;
 }
 
 .hidden {
@@ -138,28 +188,33 @@ footer {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    header {
-        padding: 1rem 0;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-    }
-
-    nav ul {
+    nav {
         flex-direction: column;
     }
 
+    nav ul {
+        margin-top: 1rem;
+    }
+
     nav ul li {
-        margin: 5px 0;
+        margin: 0 0.5rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .ai-animation {
+        font-size: 2rem;
     }
 
     #gallery {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
+        padding: 3rem 5%;
     }
 }
