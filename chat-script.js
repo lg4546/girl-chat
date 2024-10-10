@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Chat script initialized');
     const chatTitle = document.getElementById('chat-title');
     const chatMessages = document.getElementById('chat-messages');
     const messageInput = document.getElementById('message-input');
@@ -6,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsToggle = document.getElementById('settings-toggle');
     const settingsPanel = document.getElementById('settings-panel');
     const aiPersonality = document.getElementById('ai-personality');
-    const beautyImage = document.getElementById('beauty-image');
+    const aiVideo = document.getElementById('ai-video');
+    const callButton = document.getElementById('call-button');
 
     // API Key
     const API_KEY = "5e3dbc3a10340b123269807268e4607d.bNrd6tZwfsRDNpGC";
@@ -28,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (beauty) {
         chatTitle.textContent = `与${beauty.name}聊天`;
-        beautyImage.innerHTML = `<img src="${beauty.image}" alt="${beauty.name}">`;
     } else {
         chatTitle.textContent = '未找到 AI 女友';
     }
@@ -57,6 +58,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${header}.${payload}.${signatureBase64}`;
     }
 
+    // 假设我们有多个视频文件对应不同的口型
+    const videoMappings = {
+        'A': 'https://www.w3schools.com/html/mov_bbb.mp4',
+        'E': 'https://www.w3schools.com/html/mov_bbb.mp4',
+        'I': 'https://www.w3schools.com/html/mov_bbb.mp4',
+        'O': 'https://www.w3schools.com/html/mov_bbb.mp4',
+        'U': 'https://www.w3schools.com/html/mov_bbb.mp4',
+        'default': 'https://www.w3schools.com/html/mov_bbb.mp4'
+    };
+
+    function changeVideo(text) {
+        console.log('Changing video for text:', text);
+        const firstChar = text.charAt(0).toUpperCase();
+        const videoSrc = videoMappings[firstChar] || videoMappings['default'];
+        console.log('Selected video source:', videoSrc);
+        aiVideo.src = videoSrc;
+        aiVideo.play().catch(e => {
+            console.error("Error playing video:", e);
+            // 如果视频无法播放，显示一个错误消息
+            aiVideo.insertAdjacentHTML('afterend', '<p>无法播放视频。请检查您的网络连接。</p>');
+        });
+    }
+
     async function getAIResponse(message) {
         const url = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
         const token = generateToken(API_KEY);
@@ -82,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
+            console.log('Sending request to AI API...');
             const response = await fetch(url, {
                 method: 'POST',
                 headers: headers,
@@ -89,13 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
             }
 
             const result = await response.json();
-            return result.choices[0].message.content;
+            console.log('API Response:', result);
+
+            if (result.choices && result.choices.length > 0 && result.choices[0].message) {
+                const aiResponse = result.choices[0].message.content;
+                changeVideo(aiResponse);
+                return aiResponse;
+            } else {
+                throw new Error('Unexpected response format');
+            }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error in getAIResponse:', error);
             return '抱歉，我遇到了一些问题。请稍后再试。';
         }
     }
@@ -124,5 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aiPersonality.addEventListener('change', () => {
         addMessage('system', `AI 性格已切换为：${aiPersonality.options[aiPersonality.selectedIndex].text}`);
+    });
+
+    // 初始化视频
+    changeVideo('default');
+
+    // 添加拨打电话的功能
+    callButton.addEventListener('click', () => {
+        const phoneNumber = '13261566870';
+        if (confirm(`确定要拨打 ${phoneNumber} 吗？`)) {
+            window.location.href = `tel:${phoneNumber}`;
+        }
     });
 });

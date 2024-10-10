@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FFF0F5;
+    background-color: #F0F2F5;
     color: #333;
     line-height: 1.6;
 }
@@ -10,89 +10,134 @@ body {
 header {
     background-color: #FFB6C1;
     color: white;
-    text-align: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .back-button {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#chat-title {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.header-spacer {
+    width: 50px; /* 与返回按钮宽度相同，保持标题居中 */
 }
 
 #chat-container {
     display: flex;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    height: calc(100vh - 120px); /* 减去header和一些边距的高度 */
 }
 
 #chat-area {
     flex: 2;
+    display: flex;
+    flex-direction: column;
     margin-right: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
 #chat-messages {
-    height: 60vh;
+    flex-grow: 1;
     overflow-y: auto;
-    border: 1px solid #FFB6C1;
     padding: 1rem;
-    background-color: white;
-    border-radius: 10px;
 }
 
 .message {
     margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.7rem 1rem;
+    border-radius: 18px;
     max-width: 70%;
+    word-wrap: break-word;
 }
 
 .user-message {
-    background-color: #FF69B4;
-    color: white;
+    background-color: #DCF8C6;
+    color: #000;
     align-self: flex-end;
     margin-left: auto;
 }
 
 .ai-message {
-    background-color: #FFB6C1;
-    color: #333;
+    background-color: #FFFFFF;
+    color: #000;
     align-self: flex-start;
+    border: 1px solid #E5E5EA;
 }
 
 #chat-input {
-    display: flex;
-    margin-top: 1rem;
+    padding: 1rem;
+    border-top: 1px solid #E5E5EA;
 }
 
 #message-input {
-    flex-grow: 1;
+    width: 100%;
     padding: 0.5rem;
-    border: 1px solid #FFB6C1;
-    border-radius: 5px;
-    resize: vertical;
+    border: 1px solid #E5E5EA;
+    border-radius: 20px;
+    resize: none;
+    font-size: 1rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+#send-button, #call-button {
+    padding: 0.5rem 1rem;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 #send-button {
-    padding: 0.5rem 1rem;
     background-color: #FF69B4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 0.5rem;
+    flex-grow: 1;
+    margin-right: 0.5rem;
 }
 
-#beauty-image {
+#call-button {
+    background-color: #4CAF50;
+}
+
+#send-button:hover {
+    background-color: #FF1493;
+}
+
+#call-button:hover {
+    background-color: #45a049;
+}
+
+#ai-avatar {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-#beauty-image img {
+#ai-video {
     width: 100%;
+    max-width: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
@@ -101,6 +146,7 @@ header {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    z-index: 1000;
 }
 
 #settings-toggle {
@@ -108,16 +154,18 @@ header {
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 #settings-panel {
     background-color: white;
-    border: 1px solid #FFB6C1;
+    border: 1px solid #E5E5EA;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .hidden {
@@ -127,6 +175,7 @@ header {
 @media (max-width: 768px) {
     #chat-container {
         flex-direction: column;
+        height: calc(100vh - 100px);
     }
 
     #chat-area {
@@ -134,7 +183,7 @@ header {
         margin-bottom: 1rem;
     }
 
-    #chat-messages {
-        height: 50vh;
+    #ai-avatar {
+        display: none; /* 在移动设备上隐藏视频 */
     }
 }
